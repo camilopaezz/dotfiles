@@ -1,0 +1,13 @@
+[user]
+	email = camilopaez.dev@gmail.com
+	name = Camilo Paez
+[init]
+	defaultBranch = main
+[merge]
+    tool = code
+[mergetool "code"]
+    cmd = code --wait $MERGED
+[diff]
+    tool = code
+[difftool "code"]
+    cmd = code --wait --diff $LOCAL $REMOTE

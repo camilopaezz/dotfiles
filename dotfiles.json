@@ -1,0 +1,7 @@
+{
+    "alacritty.toml": ".alacritty.toml",
+    "zshrc": ".zshrc",
+    "gitconfig": ".gitconfig",
+    "hyprconf/1920x1080@72Hz.conf": ".config/hypr/conf/monitors/1920x1080@72Hz.conf",
+    "hyprconf/camilo-keybind.conf": ".config/hypr/conf/keybindings/camilo-keybind.conf"
+}
