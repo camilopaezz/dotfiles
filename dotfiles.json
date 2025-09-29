@@ -1,7 +1,38 @@
 {
+  "dotfiles": {
     "alacritty.toml": ".alacritty.toml",
-    "zshrc": ".zshrc",
     "gitconfig": ".gitconfig",
     "hyprconf/1920x1080@72Hz.conf": ".config/hypr/conf/monitors/1920x1080@72Hz.conf",
-    "hyprconf/camilo-keybind.conf": ".config/hypr/conf/keybindings/camilo-keybind.conf"
+    "hyprconf/camilo-keybind.conf": ".config/hypr/conf/keybindings/camilo-keybind.conf",
+    "hyprconf/camilo-windows.conf": ".config/hypr/conf/windows/camilo-windows.conf",
+    "tmux.conf": ".tmux.conf",
+    "zshrc": ".zshrc"
+  },
+  "packages": {
+    "official": [
+      "bash-completion",
+      "btop",
+      "curl",
+      "fish",
+      "fzf",
+      "git",
+      "kitty",
+      "nano",
+      "neovim",
+      "noto-fonts-cjk",
+      "noto-fonts-emoji",
+      "noto-fonts-extra",
+      "noto-fonts",
+      "tmux",
+      "ttf-cascadia-code-nerd",
+      "ttf-fira-code",
+      "ttf-fira-sans",
+      "ttf-jetbrains-mono-nerd",
+      "ttf-liberation-sans",
+      "wget",
+      "zed",
+      "zsh"
+    ],
+    "aur": ["zen-browser-bin", "visual-studio-code-bin"]
+  }
 }
