@@ -61,27 +61,27 @@ func (pm *PackageManager) InstallYay() error {
 }
 
 // InstallPackages installs packages using pacman and yay
-func (pm *PackageManager) InstallPackages(packages []string) error {
+func (pm *PackageManager) InstallPackages(packages []string, officialPackages []string) error {
 	if len(packages) == 0 {
 		fmt.Println("No packages to install")
 		return nil
 	}
 
 	// Separate official packages (pacman) from AUR packages (yay)
-	var officialPackages []string
+	var officialPackagesToInstall []string
 	var aurPackages []string
 
 	for _, pkg := range packages {
-		if pm.isOfficialPackage(pkg) {
-			officialPackages = append(officialPackages, pkg)
+		if pm.isOfficialPackage(pkg, officialPackages) {
+			officialPackagesToInstall = append(officialPackagesToInstall, pkg)
 		} else {
 			aurPackages = append(aurPackages, pkg)
 		}
 	}
 
 	// Install official packages with pacman
-	if len(officialPackages) > 0 {
-		if err := pm.installWithPacman(officialPackages); err != nil {
+	if len(officialPackagesToInstall) > 0 {
+		if err := pm.installWithPacman(officialPackagesToInstall); err != nil {
 			return fmt.Errorf("failed to install official packages: %w", err)
 		}
 	}
@@ -97,15 +97,17 @@ func (pm *PackageManager) InstallPackages(packages []string) error {
 }
 
 // isOfficialPackage checks if a package is in official repositories
-func (pm *PackageManager) isOfficialPackage(pkg string) bool {
-	if pm.dryRun {
-		// In dry run, assume common packages are official
-		officialPackages := []string{"git", "vim", "curl", "wget", "htop", "neofetch"}
-		for _, official := range officialPackages {
-			if pkg == official {
-				return true
-			}
+func (pm *PackageManager) isOfficialPackage(pkg string, officialPackages []string) bool {
+	// First check if package is in the official list from config
+	for _, official := range officialPackages {
+		if pkg == official {
+			return true
 		}
+	}
+
+	if pm.dryRun {
+		// In dry run mode, we trust the config classification
+		// If it's not in official list, assume it's AUR
 		return false
 	}
 
