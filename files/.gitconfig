@@ -1,0 +1,19 @@
+[user]
+    name = "Camilo Paez"
+    email = "camilopaez.dev@gmail.com"
+
+[init]
+    defaultBranch = main
+
+[merge]
+    tool = zed
+
+[mergetool "code"]
+    cmd = zed --wait $MERGED
+
+[diff]
+    tool = zed
+
+[difftool "zed"]
+    trustExitCode = true
+    cmd = zed --wait --diff $LOCAL $REMOTE
