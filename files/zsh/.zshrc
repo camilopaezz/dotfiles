@@ -28,6 +28,15 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 
+# Load Github CLI completions
+zinit ice as"completion" \
+          atclone"gh completion -s zsh > _gh" \
+          atpull"%atclone" \
+          run-atpull \
+          nocompile \
+          blockf
+zinit light zdharma-continuum/null
+
 # Add in Powerlevel10k
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
