@@ -18,6 +18,12 @@
         "ignoreMouseInput": false,
         "overviewLayer": false,
         "pinnedApps": [
+            "chromium",
+            "dev.zed.Zed-Preview",
+            "steam",
+            "com.mitchellh.ghostty",
+            "localsend",
+            "opencode-desktop"
         ],
         "position": "center",
         "screenshotAnnotationTool": "",
@@ -473,7 +479,7 @@
         "weatherTaliaMascotAlways": false
     },
     "network": {
-        "bluetoothAutoConnect": true,
+        "bluetoothAutoConnect": false,
         "bluetoothDetailsViewMode": "grid",
         "bluetoothHideUnnamedDevices": false,
         "bluetoothRssiPollIntervalMs": 60000,

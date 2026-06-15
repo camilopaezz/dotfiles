@@ -18,6 +18,7 @@ FILE_LINKS = {
     ".gitconfig": Path.home() / ".gitconfig",
     "ghostty/config.ghostty": Path.home() / ".config" / "ghostty" / "config",
     "ghostty/themes/noctalia": Path.home() / ".config" / "ghostty" / "themes" / "noctalia",
+    "zsh/.zshenv": Path.home() / ".zshenv",
     "zsh/.zshrc": Path.home() / ".zshrc",
     "zsh/.p10k.zsh": Path.home() / ".p10k.zsh",
 }
