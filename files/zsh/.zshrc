@@ -95,6 +95,19 @@ alias dev='cd ~/Projects/dev'
 alias ls='ls -a --color'
 alias vim='nvim'
 alias c='clear'
+alias claudex='CLAUDE_CODE_NO_FLICKER=1 claude --dangerously-skip-permissions'
 
 # Shell integrations
 eval "$(fzf --zsh)"
+
+# PATH + env live in ~/.zshenv (loaded for every zsh, including agent shells).
+
+# >>> grok installer >>>
+# Completions only — PATH is set in ~/.zshenv.
+fpath=(~/.grok/completions/zsh $fpath)
+autoload -Uz compinit && compinit -C
+# <<< grok installer <<<
+
+
+# Vite+ bin (https://viteplus.dev)
+. "$HOME/.vite-plus/env"
