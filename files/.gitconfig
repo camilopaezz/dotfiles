@@ -17,3 +17,5 @@
 [difftool "zed"]
     trustExitCode = true
     cmd = zed --wait --diff $LOCAL $REMOTE
+[pull]
+	rebase = true

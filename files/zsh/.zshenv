@@ -12,16 +12,15 @@ export PATH="$HOME/go/bin:$HOME/.grok/bin:$HOME/.bun/bin:$HOME/.local/bin:$ANDRO
 
 export OPENCODE_ENABLE_EXA=true
 
-# >>> Claude Code via CLIProxyAPI (Kimi K3 + xAI Grok) >>>
-export ANTHROPIC_DEFAULT_OPUS_MODEL=kimi-k3
+# >>> Claude Code via CLIProxyAPI (xAI Grok, effort by tier) >>>
+# (effort) suffix sets reasoning effort for that alias.
+export ANTHROPIC_DEFAULT_OPUS_MODEL=grok-4.6(high)
 export ANTHROPIC_DEFAULT_SONNET_MODEL=grok-4.5(high)
 export ANTHROPIC_DEFAULT_HAIKU_MODEL=grok-composer-2.5-fast(high)
 # Claude Code hardcodes 200k for non-claude-* model IDs and does not use
-# CLIProxyAPI's max_input_tokens. This override applies to all non-claude models
-# (e.g. grok-4.5=500k). Composer 2.5 is only 200k upstream — switch this down
-# if you primarily use that alias.
+# CLIProxyAPI's max_input_tokens. Grok 4.5/4.6 are 500k upstream.
 export CLAUDE_CODE_MAX_CONTEXT_TOKENS=500000
-# <<< Claude Code via CLIProxyAPI (Kimi K3 + xAI Grok) <<<
+# <<< Claude Code via CLIProxyAPI (xAI Grok, effort by tier) <<<
 
 # Vite+ bin (https://viteplus.dev)
 . "$HOME/.vite-plus/env"
