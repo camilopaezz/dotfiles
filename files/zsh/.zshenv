@@ -13,6 +13,7 @@ export PATH="$HOME/go/bin:$HOME/.grok/bin:$HOME/.bun/bin:$HOME/.local/bin:$ANDRO
 export OPENCODE_ENABLE_EXA=true
 
 # >>> Claude Code via CLIProxyAPI (xAI Grok, effort by tier) >>>
+# ANTHROPIC_BASE_URL + ANTHROPIC_AUTH_TOKEN live in ~/.config/secrets/ai.env
 # (effort) suffix sets reasoning effort for that alias.
 export ANTHROPIC_DEFAULT_OPUS_MODEL=grok-4.6(high)
 export ANTHROPIC_DEFAULT_SONNET_MODEL=grok-4.5(high)
