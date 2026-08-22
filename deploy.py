@@ -26,6 +26,7 @@ FILE_LINKS = {
 DIR_LINKS = {
     "hypr": Path.home() / ".config" / "hypr",
     "noctalia": Path.home() / ".config" / "noctalia",
+    "satty": Path.home() / ".config" / "satty",
 }
 
 
