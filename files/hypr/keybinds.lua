@@ -5,7 +5,7 @@
 -- Set programs that you use
 local terminal    = "ghostty"
 local fileManager = "nautilus"
-local browser     = "chromium"
+local browser     = "helium-browser"
 local editor      = "zeditor"
 
 ---------------------
