@@ -176,11 +176,11 @@ hl.config({
     },
 })
 
--- Example per-device config
--- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
+-- Per-device input. Names from `hyprctl devices`.
+-- ydotool --absolute is relative motion; flat accel keeps it 1:1.
 hl.device({
-    name        = "epic-mouse-v1",
-    sensitivity = -0.5,
+    name          = "ydotoold-virtual-device-1",
+    accel_profile = "flat",
 })
 
 --------------------------------
