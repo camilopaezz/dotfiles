@@ -1,1 +1,74 @@
+# Desktop
+hyprland
+hyprpaper
+hyprlauncher
+hyprpolkitagent
+xdg-desktop-portal-hyprland
+noctalia-git
+ghostty
+helium-browser-bin
+nautilus
+grim
+satty
+playerctl
+pavucontrol
+wlsunset
+nwg-look
+qt6ct
+adw-gtk-theme
+wireplumber
+pipewire-pulse
+qt5-wayland
+qt6-wayland
+bluez
+bluez-utils
+gnome-keyring
+brightnessctl
+zed-preview-bin
 
+# Shell
+zsh
+paru
+fzf
+ripgrep
+btop
+tmux
+fastfetch
+git
+github-cli
+
+# Fonts (ghostty + noctalia)
+ttf-jetbrains-mono
+ttf-fira-sans
+ttf-meslo-nerd
+ttf-cascadia-code-nerd
+noto-fonts
+noto-fonts-emoji
+noto-fonts-cjk
+
+# Dev
+base-devel
+bun
+fnm
+uv
+rustup
+go
+docker
+docker-compose
+docker-buildx
+
+# Apps
+heroic-games-launcher-bin
+mpv
+localsend
+onlyoffice-bin
+qbittorrent
+tailscale
+yt-dlp
+visual-studio-code-bin
+opencode-desktop-bin
+sunshine
+moonlight-qt
+cloudflared
+ufw
+ufw-extras
