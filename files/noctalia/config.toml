@@ -16,7 +16,7 @@ start = [ "launcher", "workspaces", "media" ]
 thickness = 28
 
 [dock]
-pinned = [ "chromium" ]
+pinned = [ "helium" ]
 
 [lockscreen_widgets]
 enabled = false
