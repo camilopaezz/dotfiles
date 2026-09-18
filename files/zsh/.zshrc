@@ -111,3 +111,6 @@ autoload -Uz compinit && compinit -C
 
 # Vite+ bin (https://viteplus.dev)
 . "$HOME/.vite-plus/env"
+
+# opencode
+export PATH=/home/camilo/.opencode/bin:$PATH

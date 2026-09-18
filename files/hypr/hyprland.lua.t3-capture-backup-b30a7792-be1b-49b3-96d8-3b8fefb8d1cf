@@ -231,5 +231,3 @@ hl.window_rule({
     move  = "20 monitor_h-120",
     float = true,
 })
-
-hl.bind("CTRL + SHIFT + 2", hl.dsp.global("com.t3tools.T3Code:capture-window"))
