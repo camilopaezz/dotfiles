@@ -2,7 +2,7 @@
   "permissions": {
     "defaultMode": "auto"
   },
-  "model": "sonnet",
+  "model": "opus",
   "enabledPlugins": {
     "frontend-design@claude-plugins-official": true
   },
@@ -15,8 +15,25 @@
     }
   },
   "effortLevel": "high",
+  "modelSettings": {
+    "grok-4.6": { "effortLevel": "high" },
+    "grok-4.5": { "effortLevel": "high" },
+    "grok-composer-2.5-fast": { "effortLevel": "high" }
+  },
+  "env": {
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "grok-4.6",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "grok-4.5",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "grok-composer-2.5-fast",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL_SUPPORTED_CAPABILITIES": "effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL_SUPPORTED_CAPABILITIES": "effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL_SUPPORTED_CAPABILITIES": "effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking",
+    "CLAUDE_CODE_ALWAYS_ENABLE_EFFORT": "1",
+    "CLAUDE_CODE_MAX_CONTEXT_TOKENS": "500000"
+  },
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark",
   "editorMode": "normal",
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "autoMemoryEnabled": false,
+  "autoDreamEnabled": false
 }
