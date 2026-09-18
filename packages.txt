@@ -4,7 +4,7 @@ hyprpaper
 hyprlauncher
 hyprpolkitagent
 xdg-desktop-portal-hyprland
-noctalia-git
+noctalia
 ghostty
 helium-browser-bin
 nautilus
