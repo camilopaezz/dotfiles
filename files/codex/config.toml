@@ -1,0 +1,9 @@
+[mcp_servers.hypruse]
+command = "uvx"
+args = ["hypruse"]
+
+[projects."/home/camilo/code/SwiftMask"]
+trust_level = "trusted"
+
+[projects."/home/camilo/code/skycut"]
+trust_level = "trusted"
