@@ -28,6 +28,9 @@ DIR_LINKS = {
     "noctalia": Path.home() / ".config" / "noctalia",
     "satty": Path.home() / ".config" / "satty",
     "claude": Path.home() / ".claude",
+    "codex": Path.home() / ".codex",
+    # Same skill tree as Claude Code; Codex loads $CODEX_HOME/skills/<name>/SKILL.md
+    "claude/skills": Path.home() / ".codex" / "skills",
 }
 
 

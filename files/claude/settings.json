@@ -1,8 +1,20 @@
 {
+  "env": {
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "grok-4.7",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "grok-4.5",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "grok-composer-2.5-fast",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL_SUPPORTED_CAPABILITIES": "effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL_SUPPORTED_CAPABILITIES": "effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL_SUPPORTED_CAPABILITIES": "effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking",
+    "CLAUDE_CODE_ALWAYS_ENABLE_EFFORT": "1",
+    "CLAUDE_CODE_MAX_CONTEXT_TOKENS": "500000",
+    "CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY": "1",
+    "CLAUDE_CODE_MODEL_CAPABILITIES": "grok-*=effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking;claude-*=effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking;gpt-*=effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking;kiro-*=effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking;union-alpha=effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking"
+  },
   "permissions": {
     "defaultMode": "auto"
   },
-  "model": "opus",
+  "model": "sonnet",
   "enabledPlugins": {
     "frontend-design@claude-plugins-official": true
   },
@@ -16,24 +28,59 @@
   },
   "effortLevel": "high",
   "modelSettings": {
-    "grok-4.6": { "effortLevel": "high" },
-    "grok-4.5": { "effortLevel": "high" },
-    "grok-composer-2.5-fast": { "effortLevel": "high" }
+    "grok-4.7": {
+      "effortLevel": "high"
+    },
+    "grok-4.6": {
+      "effortLevel": "high"
+    },
+    "grok-4.5": {
+      "effortLevel": "high"
+    },
+    "grok-composer-2.5-fast": {
+      "effortLevel": "high"
+    },
+    "claude-opus-5": {
+      "effortLevel": "high"
+    },
+    "claude-sonnet-5": {
+      "effortLevel": "high"
+    },
+    "gpt-5.6": {
+      "effortLevel": "high"
+    },
+    "gpt-5.6-luna": {
+      "effortLevel": "low"
+    },
+    "gpt-5.6-terra": {
+      "effortLevel": "high"
+    },
+    "gpt-5.6-sol": {
+      "effortLevel": "high"
+    },
+    "kiro-claude-opus-5": {
+      "effortLevel": "high"
+    },
+    "kiro-claude-sonnet-5": {
+      "effortLevel": "high"
+    },
+    "kiro-gpt-5.6": {
+      "effortLevel": "high"
+    },
+    "kiro-gpt-5.6-luna": {
+      "effortLevel": "low"
+    },
+    "kiro-gpt-5.6-terra": {
+      "effortLevel": "high"
+    },
+    "kiro-gpt-5.6-sol": {
+      "effortLevel": "high"
+    }
   },
-  "env": {
-    "ANTHROPIC_DEFAULT_OPUS_MODEL": "grok-4.6",
-    "ANTHROPIC_DEFAULT_SONNET_MODEL": "grok-4.5",
-    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "grok-composer-2.5-fast",
-    "ANTHROPIC_DEFAULT_OPUS_MODEL_SUPPORTED_CAPABILITIES": "effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking",
-    "ANTHROPIC_DEFAULT_SONNET_MODEL_SUPPORTED_CAPABILITIES": "effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking",
-    "ANTHROPIC_DEFAULT_HAIKU_MODEL_SUPPORTED_CAPABILITIES": "effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking",
-    "CLAUDE_CODE_ALWAYS_ENABLE_EFFORT": "1",
-    "CLAUDE_CODE_MAX_CONTEXT_TOKENS": "500000"
-  },
+  "autoMemoryEnabled": false,
+  "autoDreamEnabled": false,
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark",
   "editorMode": "normal",
-  "skipAutoPermissionPrompt": true,
-  "autoMemoryEnabled": false,
-  "autoDreamEnabled": false
+  "skipAutoPermissionPrompt": true
 }
