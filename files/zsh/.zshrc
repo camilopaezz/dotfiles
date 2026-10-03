@@ -97,6 +97,39 @@ alias vim='nvim'
 alias c='clear'
 alias claudex='CLAUDE_CODE_NO_FLICKER=1 claude --dangerously-skip-permissions'
 
+# kiro/hub opt into CLIProxyAPI. `claude` itself does not.
+_CLIPROXY_PROFILES="$HOME/Projects/dev/dotfiles-v2/files/claude/profiles"
+
+_cliproxy_claude() {
+  local profile="$1"
+  shift
+  if [[ -z ${CLIPROXY_BASE_URL-} || -z ${CLIPROXY_AUTH_TOKEN-} ]]; then
+    print -u2 "cliproxy credentials missing. Expected CLIPROXY_BASE_URL and CLIPROXY_AUTH_TOKEN from ~/.config/secrets/ai.env."
+    return 1
+  fi
+  if [[ ! -f $profile ]]; then
+    print -u2 "missing claude profile: $profile"
+    return 1
+  fi
+  # Subshell so an old shell's Grok pins are not passed down and are not cleared here.
+  (
+    unset ANTHROPIC_DEFAULT_OPUS_MODEL ANTHROPIC_DEFAULT_SONNET_MODEL ANTHROPIC_DEFAULT_HAIKU_MODEL \
+      ANTHROPIC_DEFAULT_OPUS_MODEL_SUPPORTED_CAPABILITIES \
+      ANTHROPIC_DEFAULT_SONNET_MODEL_SUPPORTED_CAPABILITIES \
+      ANTHROPIC_DEFAULT_HAIKU_MODEL_SUPPORTED_CAPABILITIES \
+      CLAUDE_CODE_MODEL_CAPABILITIES CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY \
+      CLAUDE_CODE_ALWAYS_ENABLE_EFFORT CLAUDE_CODE_MAX_CONTEXT_TOKENS
+    ANTHROPIC_BASE_URL="$CLIPROXY_BASE_URL" \
+    ANTHROPIC_AUTH_TOKEN="$CLIPROXY_AUTH_TOKEN" \
+      command claude --settings "$profile" "$@"
+  )
+}
+
+kiro()  { _cliproxy_claude "$_CLIPROXY_PROFILES/kiro.json" "$@"; }
+kirox() { CLAUDE_CODE_NO_FLICKER=1 _cliproxy_claude "$_CLIPROXY_PROFILES/kiro.json" --dangerously-skip-permissions "$@"; }
+hub()   { _cliproxy_claude "$_CLIPROXY_PROFILES/hub.json" "$@"; }
+hubx()  { CLAUDE_CODE_NO_FLICKER=1 _cliproxy_claude "$_CLIPROXY_PROFILES/hub.json" --dangerously-skip-permissions "$@"; }
+
 # Shell integrations
 eval "$(fzf --zsh)"
 

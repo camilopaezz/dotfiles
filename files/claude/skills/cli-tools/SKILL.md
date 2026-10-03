@@ -5,41 +5,38 @@ description: Share a local file as a temporary public URL. Use when the user wan
 
 # cli-tools
 
-**Share** = put a local file on a temporary public URL, then give the user that URL.
-
-## Delivery rule
-
-On this surface the user only receives files via a **public URL**. Chat cannot attach, embed, or render media for them. A prose description of the screen is not delivery.
-
-When they ask to send/show/give a file: have it on disk → upload with this skill → reply with the URL. That is the whole path.
+Share means put a local file on a temporary public URL, then give the user that URL. In this chat that URL is the only delivery. A prose description of the screen is not delivery.
 
 ## Steps
 
-1. **Have a file on disk.** No file yet → create it first (screenshot → `.png`/`.jpg`/`.webp`; HTML → write it; video → `.mp4`/`.webm`/`.mov` already captured). Done when a local path exists.
-2. **Upload.** Pick the command by kind. Capture **stdout** only.
+1. Have a nonempty file on disk. Done when a local path exists. If none exists yet, write a screenshot as `.png`, `.jpg`, or `.webp`, write HTML to `.html` or `.htm`, or use a captured `.mp4`, `.webm`, `.mov`, or `.m4v`.
+
+2. Run one `cli-tools` command. Read stdout only. The command sends the bearer token and, for `file`, `Content-Length`.
 
 ```bash
 cli-tools plan  <file.html> [--ttl 7d]
 cli-tools image <file>      [--ttl 7d] [--no-compress]
 cli-tools video <file>      [--ttl 7d]
+cli-tools file  <file>      [--ttl 24h]
 ```
 
-| Kind | Use when | Notes |
-|------|----------|--------|
-| `plan` | `.html`/`.htm` | raw; max 2MB |
-| `image` | png/jpg/jpeg/webp static | WebP re-encode by default; max 10MB in / 5MB out; no gif/animated |
-| `video` | mp4/webm/mov (also `.m4v`) | max 50MB; auto local ffmpeg re-encode if >10MB (falls back to raw on ffmpeg miss/fail; may warn on stderr) |
+Pick the command for how the user should receive the file. Extensions match case-insensitively. Flags may follow the path.
 
-3. **Done** only when exit 0 and stdout is one non-empty URL line — reply with that URL (optional TTL note). On non-zero exit: fix from stderr and retry. Auth missing → tell the user to run `cli-tools auth set` (user supplies the token; never invent or paste one into commands).
+| Command | Use when | Behavior |
+|---------|----------|----------|
+| `plan` | HTML the user should open in a browser. `.html` or `.htm` only. | Raw upload. Max 2 MiB. Default TTL `7d`. |
+| `image` | A static png, jpg, jpeg, or webp the user should see. | Re-encodes to lossless WebP unless `--no-compress`. Input max 10 MiB. Encoded output max 5 MiB. Rejects gif and animated images. `--quality` is accepted and ignored. Default TTL `7d`. |
+| `video` | An mp4, m4v, webm, or mov the user should play. | Max 50 MiB. Over 10 MiB, re-encodes with local ffmpeg and uploads the original if ffmpeg is missing, fails, or does not shrink the file. Pass the captured file. Default TTL `7d`. |
+| `file` | Any other nonempty local file, when a download is enough. | Unchanged bytes as `application/octet-stream`. Max 100 MiB. Default TTL `24h`. The Worker requires `Content-Length`; the command sets it and preserves the original download filename and extension. |
 
-## Contract
+Viewable HTML, images, and video go through `plan`, `image`, or `video`. `file` always downloads.
 
-| Rule | Detail |
-|------|--------|
-| Success | stdout = URL only; exit 0 |
-| Failure | empty stdout; `error: ...` on stderr; non-zero exit |
-| TTL | default `7d`; `Nh` or `Nd`; max `30d`; no forever |
-| Prefer | this binary over raw `curl` to the upload API |
-| No | list/delete; forever links; pre-running ffmpeg for size (video does that) |
+TTL override is `Nh` or `Nd`, minimum 1, maximum `30d`.
 
-URLs expire — re-upload if a dead link matters. `--quality` on image is accepted but ignored (lossless encode). Video stays R2-only (no Cloudflare Stream).
+3. Reply with the URL. A short TTL note is optional. Done only when the exit code is 0 and stdout is one non-empty URL line. That line is the URL. A stderr `warning:` from a skipped video re-encode can appear on success. Stderr is not the URL.
+
+On a non-zero exit, stdout is empty and stderr is one `error:` line. Fix from that line and retry.
+
+If the error is `no token: set CLI_TOOLS_TOKEN or run auth set`, tell the user to run `cli-tools auth set` and supply the token themselves. Do not invent a token or put one in a command. When `CLI_TOOLS_TOKEN` is set, it wins over the config file. On `upload failed (401)`, the stored token was rejected. Ask the user to run `auth set` again.
+
+URLs expire. Upload again when a dead link matters. There is no list or delete command.

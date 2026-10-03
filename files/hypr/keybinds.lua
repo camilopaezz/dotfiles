@@ -20,6 +20,8 @@ hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd(editor))
 hl.bind("Print",
     hl.dsp.exec_cmd('grim - | satty -f -'))
+hl.bind(mainMod .. " + SHIFT + S",
+    hl.dsp.exec_cmd('grim - | satty -f -'))
 
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
