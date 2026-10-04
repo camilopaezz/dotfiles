@@ -29,9 +29,12 @@ DIR_LINKS = {
     "satty": Path.home() / ".config" / "satty",
     "claude": Path.home() / ".claude",
     "codex": Path.home() / ".codex",
-    # Same skill tree as Claude Code; Codex loads $CODEX_HOME/skills/<name>/SKILL.md
-    "claude/skills": Path.home() / ".codex" / "skills",
 }
+
+SKILL_DIRS = (
+    Path.home() / ".claude" / "skills",
+    Path.home() / ".agents" / "skills",
+)
 
 
 # ── Helpers ─────────────────────────────────────────────────────
@@ -52,8 +55,9 @@ def err(msg):
     print(f"  \033[31m\u2717\033[0m {msg}")
 
 
-def link_file(src, dst, dry_run):
-    dst.parent.mkdir(parents=True, exist_ok=True)
+def link_file(src, dst, dry_run, backup_dir=None):
+    if not dry_run:
+        dst.parent.mkdir(parents=True, exist_ok=True)
 
     if dst.is_symlink():
         if dst.resolve() == src:
@@ -63,11 +67,16 @@ def link_file(src, dst, dry_run):
             dst.unlink()
 
     if dst.exists() and not dst.is_symlink():
-        backup = dst.with_name(dst.name + BACKUP_SUFFIX)
+        backup = (backup_dir or dst.parent) / (dst.name + BACKUP_SUFFIX)
+        index = 1
+        while backup.exists() or backup.is_symlink():
+            backup = backup.with_name(dst.name + BACKUP_SUFFIX + f".{index}")
+            index += 1
         if dry_run:
-            warn(f"Would backup {dst.name} \u2192 {backup.name}")
+            warn(f"Would backup {dst} \u2192 {backup}")
         else:
-            warn(f"Backing up {dst.name} \u2192 {backup.name}")
+            warn(f"Backing up {dst} \u2192 {backup}")
+            backup.parent.mkdir(parents=True, exist_ok=True)
             shutil.move(str(dst), str(backup))
 
     if dry_run:
@@ -77,7 +86,7 @@ def link_file(src, dst, dry_run):
         ok(f"Linked: {dst.name}")
 
 
-def link_dir(src_dir, dst_dir, dry_run):
+def link_dir(src_dir, dst_dir, dry_run, exclude=()):
     if not src_dir.is_dir():
         err(f"Source directory not found: {src_dir}")
         return
@@ -86,6 +95,8 @@ def link_dir(src_dir, dst_dir, dry_run):
         if src_path.is_dir():
             continue
         rel = src_path.relative_to(src_dir)
+        if rel.parts[0] in exclude:
+            continue
         dst = dst_dir / rel
         link_file(src_path, dst, dry_run)
 
@@ -107,7 +118,25 @@ def cmd_link(dry_run=False):
         if not src.is_dir():
             err(f"Source directory not found: {src}")
             continue
-        link_dir(src, dst, dry_run)
+        link_dir(src, dst, dry_run, exclude=("skills",) if dir_name == "claude" else ())
+
+    cmd_skills(dry_run=dry_run)
+
+
+def cmd_skills(dry_run=False):
+    print("\n\033[1mSymlinking shared skills…\033[0m")
+    src_dir = FILES / "claude" / "skills"
+    if not src_dir.is_dir():
+        err(f"Source directory not found: {src_dir}")
+        return
+
+    # Link whole folders so supporting files stay in sync. Backups sit outside discovery.
+    for src in sorted(src_dir.iterdir()):
+        if src.name.startswith(".") or not src.is_dir() or not (src / "SKILL.md").is_file():
+            continue
+        for dst_dir in SKILL_DIRS:
+            link_file(src, dst_dir / src.name, dry_run,
+                      backup_dir=dst_dir.parent / "skill-backups")
 
 
 def cmd_install(aur=False, dry_run=False):
@@ -150,7 +179,7 @@ def main():
     parser = argparse.ArgumentParser(description="Deploy dotfiles")
     parser.add_argument(
         "command",
-        choices=["link", "install", "all"],
+        choices=["link", "skills", "install", "all"],
         help="Action to perform",
     )
     parser.add_argument(
@@ -167,6 +196,8 @@ def main():
 
     if args.command in ("link", "all"):
         cmd_link(dry_run=args.dry_run)
+    if args.command == "skills":
+        cmd_skills(dry_run=args.dry_run)
     if args.command in ("install", "all"):
         cmd_install(aur=args.aur, dry_run=args.dry_run)
 

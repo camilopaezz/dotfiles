@@ -1,9 +1,69 @@
+model = "gpt-6.1-sol"
+model_reasoning_effort = "low"
 [mcp_servers.hypruse]
 command = "uvx"
 args = ["hypruse"]
+startup_timeout_sec = 30
+env_vars = [
+    "WAYLAND_DISPLAY",
+    "HYPRLAND_INSTANCE_SIGNATURE",
+    "XDG_RUNTIME_DIR",
+    "DBUS_SESSION_BUS_ADDRESS",
+    "DISPLAY",
+]
+
+[mcp_servers.hypruse.env]
+HYPRUSE_SCREENSHOT_MODE = "image"
+
+[mcp_servers.hypruse.tools.desktop]
+approval_mode = "approve"
 
 [projects."/home/camilo/code/SwiftMask"]
 trust_level = "trusted"
 
 [projects."/home/camilo/code/skycut"]
 trust_level = "trusted"
+
+[projects."/home/camilo/code/twine"]
+trust_level = "trusted"
+
+[projects."/home/camilo/code/t3code"]
+trust_level = "trusted"
+
+[projects."/home/camilo/code/st2-mode"]
+trust_level = "trusted"
+
+[projects."/home/camilo/Projects/dev/tikitoki"]
+trust_level = "trusted"
+
+[tui]
+screen_reader_detection_done = true
+
+[tui.model_availability_nux]
+"gpt-6.1-sol" = 1
+
+[hooks.state]
+
+[hooks.state."/home/camilo/.codex/hooks.json:pre_tool_use:0:0"]
+trusted_hash = "sha256:331aa957d9169962fdc66544cfb5eb71526792415233ff5cadffb6003d17d8bf"
+
+[hooks.state."/home/camilo/.codex/hooks.json:permission_request:0:0"]
+trusted_hash = "sha256:7820a4c3c7c4b2e42bacd5ec4e299e5bdf469dc220e6acf36c102cc44e48423a"
+
+[hooks.state."/home/camilo/.codex/hooks.json:post_tool_use:0:0"]
+trusted_hash = "sha256:a9433147ad7d1cb0e53c50637bcfdfca6edc778e1a11ef8b3d98274efda5879f"
+
+[hooks.state."/home/camilo/.codex/hooks.json:session_start:0:0"]
+trusted_hash = "sha256:a317a3a0263dd815a3e5587ec7824c10af6b59cd5f6bcd0d8eb2fb263c70bcf5"
+
+[hooks.state."/home/camilo/.codex/hooks.json:user_prompt_submit:0:0"]
+trusted_hash = "sha256:cdd3cd0eedad6aabfd72b018900f4a4de14a7ab67478661c848cfd01671b597f"
+
+[hooks.state."/home/camilo/.codex/hooks.json:subagent_start:0:0"]
+trusted_hash = "sha256:e07c1f6cf547ad67d2e4d0ee0a46bd2fef382eeb5305a3ee5a493ec3d20ec904"
+
+[hooks.state."/home/camilo/.codex/hooks.json:subagent_stop:0:0"]
+trusted_hash = "sha256:1c655612ebdc734329ff6ce48e25153ae98f4a2f9218275687363f63825cd06b"
+
+[hooks.state."/home/camilo/.codex/hooks.json:stop:0:0"]
+trusted_hash = "sha256:511b86151ef728174b6ec67b49de3d3cdca431886046498307c4c06eedd3490a"
