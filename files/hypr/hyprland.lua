@@ -85,7 +85,7 @@ hl.config({
 
         -- Change transparency of focused and unfocused windows
         active_opacity   = 1.0,
-        inactive_opacity = 1.0,
+        inactive_opacity = 0.97,
 
         shadow           = {
             enabled      = true,
@@ -233,3 +233,6 @@ hl.window_rule({
 })
 
 hl.bind("CTRL + SHIFT + 2", hl.dsp.global("com.t3tools.T3Code:capture-window"))
+
+-- For Noctalia Color templates
+require("noctalia").apply_theme()

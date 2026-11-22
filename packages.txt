@@ -4,18 +4,22 @@ hyprpaper
 hyprlauncher
 hyprpolkitagent
 xdg-desktop-portal-hyprland
+xdg-desktop-portal-kde
+xdg-desktop-portal-gtk
 noctalia
 ghostty
 helium-browser-bin
-nautilus
+dolphin
 grim
 satty
+wl-clipboard
 playerctl
 pavucontrol
 wlsunset
 nwg-look
 qt6ct
 adw-gtk-theme
+whitesur-icon-theme
 wireplumber
 pipewire-pulse
 qt5-wayland
@@ -24,7 +28,7 @@ bluez
 bluez-utils
 gnome-keyring
 brightnessctl
-zed-preview-bin
+# Zed is installed separately at ~/.local/bin/zed
 
 # Shell
 zsh
@@ -38,6 +42,7 @@ git
 github-cli
 
 # Fonts (ghostty + noctalia)
+ttf-ibm-plex
 ttf-jetbrains-mono
 ttf-fira-sans
 ttf-meslo-nerd

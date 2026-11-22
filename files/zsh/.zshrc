@@ -90,15 +90,15 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
 
-alias zed='zeditor'
 alias dev='cd ~/Projects/dev'
 alias ls='ls -a --color'
 alias vim='nvim'
 alias c='clear'
 alias claudex='CLAUDE_CODE_NO_FLICKER=1 claude --dangerously-skip-permissions'
+alias fast-emu='nohup "$HOME/Android/Sdk/emulator/emulator" -avd Dev_Pixel_8_API_36 -gpu host -no-snapshot-load -no-audio -port 5554 </dev/null >"$HOME/.cache/fast-emu.log" 2>&1 &!'
 
 # kiro/hub opt into CLIProxyAPI. `claude` itself does not.
-_CLIPROXY_PROFILES="$HOME/Projects/dev/dotfiles-v2/files/claude/profiles"
+_CLIPROXY_PROFILES="$HOME/.claude/profiles"
 
 _cliproxy_claude() {
   local profile="$1"
@@ -131,19 +131,16 @@ hub()   { _cliproxy_claude "$_CLIPROXY_PROFILES/hub.json" "$@"; }
 hubx()  { CLAUDE_CODE_NO_FLICKER=1 _cliproxy_claude "$_CLIPROXY_PROFILES/hub.json" --dangerously-skip-permissions "$@"; }
 
 # Shell integrations
-eval "$(fzf --zsh)"
+(( $+commands[fzf] )) && eval "$(fzf --zsh)"
 
 # PATH + env live in ~/.zshenv (loaded for every zsh, including agent shells).
 
-# >>> grok installer >>>
-# Completions only — PATH is set in ~/.zshenv.
-fpath=(~/.grok/completions/zsh $fpath)
-autoload -Uz compinit && compinit -C
-# <<< grok installer <<<
+# Optional CLI completions.
+if [[ -d $HOME/.grok/completions/zsh ]]; then
+  fpath=($HOME/.grok/completions/zsh $fpath)
+  compinit -C
+fi
 
 
-# Vite+ bin (https://viteplus.dev)
-. "$HOME/.vite-plus/env"
-
-# opencode
-export PATH=/home/camilo/.opencode/bin:$PATH
+# Added by Antigravity CLI installer
+export PATH="/home/camilo/.local/bin:$PATH"

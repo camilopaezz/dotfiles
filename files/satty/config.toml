@@ -1,5 +1,6 @@
 [general]
-fullscreen = true
-copy-command = "wl-copy"
+fullscreen = "current-screen"
+copy-command = "wl-copy --type image/png"
 output-filename = "~/Pictures/Screenshots/%Y%m%d_%H%M%S.png"
-early-exit = true
+early-exit = ["all"]
+actions-on-enter = ["save-to-clipboard"]

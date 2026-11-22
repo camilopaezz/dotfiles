@@ -1,22 +1,43 @@
-model = "gpt-6.1-sol"
-model_reasoning_effort = "low"
+model = "gpt-6.1-terra"
+model_reasoning_effort = "medium"
+service_tier = "default"
+
 [mcp_servers.hypruse]
 command = "uvx"
 args = ["hypruse"]
-startup_timeout_sec = 30
-env_vars = [
-    "WAYLAND_DISPLAY",
-    "HYPRLAND_INSTANCE_SIGNATURE",
-    "XDG_RUNTIME_DIR",
-    "DBUS_SESSION_BUS_ADDRESS",
-    "DISPLAY",
-]
+env_vars = ["WAYLAND_DISPLAY", "HYPRLAND_INSTANCE_SIGNATURE", "XDG_RUNTIME_DIR", "DBUS_SESSION_BUS_ADDRESS", "DISPLAY"]
+startup_timeout_sec = 30.0
 
 [mcp_servers.hypruse.env]
 HYPRUSE_SCREENSHOT_MODE = "image"
 
 [mcp_servers.hypruse.tools.desktop]
 approval_mode = "approve"
+
+[mcp_servers.node_repl]
+args = []
+command = "/usr/lib/chatgpt/resources/cua_node/bin/node_repl"
+env_vars = ["BROWSER_USE_ACCESS_EXECUTOR_ID", "BROWSER_USE_ACCESS_PIPE_PATH", "BROWSER_USE_ACCESS_VERIFYING_IDENTITY"]
+startup_timeout_sec = 120
+
+[mcp_servers.node_repl.env]
+NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS = "1000"
+NODE_REPL_NODE_MODULE_DIRS = "/usr/lib/chatgpt/resources/cua_node/lib/node_modules"
+NODE_REPL_NODE_PATH = "/usr/lib/chatgpt/resources/cua_node/bin/node"
+NODE_REPL_TRUSTED_CODE_PATHS = "/home/camilo/.codex:/usr/lib/chatgpt/resources/cua_node/lib/node_modules"
+CODEX_HOME = "/home/camilo/.codex"
+BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab,mcpapps"
+BROWSER_USE_TINYSKY_ENABLED = "1"
+NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = ""
+NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = ""
+BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
+BROWSER_USE_CODEX_APP_VERSION = "26.1021.22027"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"/home/camilo/.codex/plugins/cache/openai-bundled/browser/26.1021.22027/scripts/browser-service.mjs"}'
+CODEX_CLI_PATH = "/usr/lib/chatgpt/resources/codex"
+
+[mcp_servers.cua-local]
+command = "/usr/bin/newgrp"
+args = ["docker", "-c", "exec /home/camilo/.local/bin/cua --embedded mcp --permissions sandbox:readonly,computer:all --sandbox agent"]
 
 [projects."/home/camilo/code/SwiftMask"]
 trust_level = "trusted"
@@ -34,6 +55,9 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/home/camilo/Projects/dev/tikitoki"]
+trust_level = "trusted"
+
+[projects."/home/camilo/Work/code/dotfiles"]
 trust_level = "trusted"
 
 [tui]
@@ -67,3 +91,49 @@ trusted_hash = "sha256:1c655612ebdc734329ff6ce48e25153ae98f4a2f9218275687363f638
 
 [hooks.state."/home/camilo/.codex/hooks.json:stop:0:0"]
 trusted_hash = "sha256:511b86151ef728174b6ec67b49de3d3cdca431886046498307c4c06eedd3490a"
+
+[desktop]
+followUpQueueMode = "steer"
+conversationDetailMode = "STEPS_PROSE"
+sansFontSize = 14
+codeFontSize = 13
+ambient-suggestions-enabled = false
+
+[marketplaces.openai-bundled]
+source_type = "local"
+source = "/home/camilo/.codex/.tmp/bundled-marketplaces/openai-bundled"
+
+[marketplaces.openai-primary-runtime]
+source_type = "local"
+source = "/home/camilo/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
+
+[plugins."codex-app-tools@openai-bundled"]
+enabled = true
+
+[plugins."browser@openai-bundled"]
+enabled = true
+
+[plugins."unified-computer-use@openai-bundled"]
+enabled = true
+
+[plugins."visualize@openai-bundled"]
+enabled = true
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."pdf@openai-primary-runtime"]
+enabled = true
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = true
+
+[plugins."template-creator@openai-primary-runtime"]
+enabled = true
+
+[[skills.config]]
+path = "/home/camilo/.agents/skills/pr/SKILL.md"
+enabled = false

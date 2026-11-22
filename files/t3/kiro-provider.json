@@ -1,0 +1,220 @@
+{
+  "driver": "claudeAgent",
+  "displayName": "Kiro",
+  "environment": [
+    {
+      "name": "ANTHROPIC_BASE_URL",
+      "value": "http://127.0.0.1:18317",
+      "sensitive": false
+    },
+    {
+      "name": "ANTHROPIC_AUTH_TOKEN",
+      "value": "",
+      "sensitive": true,
+      "valueRedacted": true
+    },
+    {
+      "name": "ANTHROPIC_DEFAULT_OPUS_MODEL",
+      "value": "claude-opus-5-5",
+      "sensitive": false
+    },
+    {
+      "name": "ANTHROPIC_DEFAULT_SONNET_MODEL",
+      "value": "claude-sonnet-5-5",
+      "sensitive": false
+    },
+    {
+      "name": "ANTHROPIC_DEFAULT_HAIKU_MODEL",
+      "value": "claude-sonnet-5-5",
+      "sensitive": false
+    },
+    {
+      "name": "ANTHROPIC_DEFAULT_OPUS_MODEL_SUPPORTED_CAPABILITIES",
+      "value": "effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking",
+      "sensitive": false
+    },
+    {
+      "name": "ANTHROPIC_DEFAULT_SONNET_MODEL_SUPPORTED_CAPABILITIES",
+      "value": "effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking",
+      "sensitive": false
+    },
+    {
+      "name": "ANTHROPIC_DEFAULT_HAIKU_MODEL_SUPPORTED_CAPABILITIES",
+      "value": "effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking",
+      "sensitive": false
+    },
+    {
+      "name": "CLAUDE_CODE_MODEL_CAPABILITIES",
+      "value": "claude-*=effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking;gpt-*=effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking",
+      "sensitive": false
+    },
+    {
+      "name": "CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY",
+      "value": "1",
+      "sensitive": false
+    },
+    {
+      "name": "CLAUDE_CODE_ALWAYS_ENABLE_EFFORT",
+      "value": "1",
+      "sensitive": false
+    },
+    {
+      "name": "CLAUDE_CODE_MAX_CONTEXT_TOKENS",
+      "value": "500000",
+      "sensitive": false
+    }
+  ],
+  "enabled": true,
+  "config": {
+    "binaryPath": "claude",
+    "homePath": "",
+    "customModels": [
+      {
+        "slug": "gpt-5.6",
+        "name": "GPT 5.6",
+        "capabilities": {
+          "optionDescriptors": [
+            {
+              "id": "effort",
+              "label": "Reasoning",
+              "type": "select",
+              "options": [
+                {
+                  "id": "low",
+                  "label": "Low"
+                },
+                {
+                  "id": "medium",
+                  "label": "Medium"
+                },
+                {
+                  "id": "high",
+                  "label": "High",
+                  "isDefault": true
+                },
+                {
+                  "id": "xhigh",
+                  "label": "Extra High"
+                },
+                {
+                  "id": "max",
+                  "label": "Max"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "slug": "gpt-5.6-sol",
+        "name": "GPT 5.6 Sol",
+        "capabilities": {
+          "optionDescriptors": [
+            {
+              "id": "effort",
+              "label": "Reasoning",
+              "type": "select",
+              "options": [
+                {
+                  "id": "low",
+                  "label": "Low"
+                },
+                {
+                  "id": "medium",
+                  "label": "Medium"
+                },
+                {
+                  "id": "high",
+                  "label": "High",
+                  "isDefault": true
+                },
+                {
+                  "id": "xhigh",
+                  "label": "Extra High"
+                },
+                {
+                  "id": "max",
+                  "label": "Max"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "slug": "gpt-5.6-terra",
+        "name": "GPT 5.6 Terra",
+        "capabilities": {
+          "optionDescriptors": [
+            {
+              "id": "effort",
+              "label": "Reasoning",
+              "type": "select",
+              "options": [
+                {
+                  "id": "low",
+                  "label": "Low"
+                },
+                {
+                  "id": "medium",
+                  "label": "Medium"
+                },
+                {
+                  "id": "high",
+                  "label": "High",
+                  "isDefault": true
+                },
+                {
+                  "id": "xhigh",
+                  "label": "Extra High"
+                },
+                {
+                  "id": "max",
+                  "label": "Max"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "slug": "gpt-5.6-luna",
+        "name": "GPT 5.6 Luna",
+        "capabilities": {
+          "optionDescriptors": [
+            {
+              "id": "effort",
+              "label": "Reasoning",
+              "type": "select",
+              "options": [
+                {
+                  "id": "low",
+                  "label": "Low",
+                  "isDefault": true
+                },
+                {
+                  "id": "medium",
+                  "label": "Medium"
+                },
+                {
+                  "id": "high",
+                  "label": "High"
+                },
+                {
+                  "id": "xhigh",
+                  "label": "Extra High"
+                },
+                {
+                  "id": "max",
+                  "label": "Max"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "launchArgs": "",
+    "autoCompactWindow": "500000"
+  }
+}

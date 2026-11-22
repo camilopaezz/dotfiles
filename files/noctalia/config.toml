@@ -2,12 +2,12 @@
 ui_scale = 1.05
 
 [bar.default]
-background_opacity = 0.0
+background_opacity = 0.9
 capsule = true
 capsule_fill = "on_primary"
 center = [ "clock", "notifications" ]
 end = [ "sysmon", "network", "tray", "bluetooth", "volume", "brightness", "caffeine", "control-center", "session" ]
-font_family = "Fira Sans"
+font_family = "Adwaita Sans"
 margin_ends = 0
 radius = 0
 radius_bottom_left = 12
@@ -56,7 +56,10 @@ position = "top_right"
     volume_output = false
 
 [shell]
-font_family = "Fira Sans"
+clipboard_enabled = true
+clipboard_history_max_entries = 100
+clipboard_keep_from_closed_apps = true
+font_family = "Adwaita Sans"
 
 [theme]
 builtin = "Tokyo-Night"
@@ -64,16 +67,17 @@ community_palette = "Cream Autumn"
 source = "community"
 
     [theme.templates]
+    builtin_ids = [ "gtk3", "gtk4", "ghostty", "hyprland", "kcolorscheme", "qt" ]
     community_ids = [ "heroiclauncher" ]
 
 [wallpaper]
 directory = "/home/camilo/Pictures/Wallpapers"
 
     [wallpaper.default]
-    path = "/home/camilo/Pictures/Wallpapers/wallhaven-zmo6jj.jpg"
+    path = "/home/camilo/Pictures/Wallpapers/monet-stacks-of-wheat-1890.jpg"
 
     [wallpaper.last]
-    path = "/home/camilo/Pictures/Wallpapers/wallhaven-zmo6jj.jpg"
+    path = "/home/camilo/Pictures/Wallpapers/monet-stacks-of-wheat-1890.jpg"
 
 [widget.media]
 hide_when_no_media = true

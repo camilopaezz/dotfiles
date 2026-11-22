@@ -27,9 +27,11 @@ class SkillDeploymentTests(unittest.TestCase):
         )
         self.claude = self.root / "home" / ".claude" / "skills"
         self.codex = self.root / "home" / ".agents" / "skills"
+        self.grok = self.root / "home" / ".grok" / "skills"
+        self.skill_dirs = (self.claude, self.codex, self.grok)
         for name, value in (
             ("FILES", self.files),
-            ("SKILL_DIRS", (self.claude, self.codex)),
+            ("SKILL_DIRS", self.skill_dirs),
         ):
             patcher = patch.object(deploy, name, value)
             patcher.start()
@@ -38,9 +40,9 @@ class SkillDeploymentTests(unittest.TestCase):
         output.__enter__()
         self.addCleanup(output.__exit__, None, None, None)
 
-    def test_both_agents_link_to_the_same_folder(self):
+    def test_all_agents_link_to_the_same_folder(self):
         deploy.cmd_skills()
-        for root in (self.claude, self.codex):
+        for root in self.skill_dirs:
             self.assertTrue((root / "example").is_symlink())
             self.assertEqual((root / "example").resolve(), self.source)
 
@@ -49,11 +51,11 @@ class SkillDeploymentTests(unittest.TestCase):
         sidecar = self.source / "agents" / "openai.yaml"
         sidecar.parent.mkdir()
         sidecar.write_text("policy:\n  allow_implicit_invocation: false\n")
-        for root in (self.claude, self.codex):
+        for root in self.skill_dirs:
             self.assertEqual((root / "example/agents/openai.yaml").read_text(), sidecar.read_text())
 
     def test_old_skill_folders_are_backed_up_outside_discovery(self):
-        for root in (self.claude, self.codex):
+        for root in self.skill_dirs:
             old = root / "example"
             old.mkdir(parents=True)
             (old / "SKILL.md").write_text("Old instructions.")
@@ -61,7 +63,7 @@ class SkillDeploymentTests(unittest.TestCase):
             existing.mkdir(parents=True)
             (existing / "SKILL.md").write_text("Earlier backup.")
         deploy.cmd_skills()
-        for root in (self.claude, self.codex):
+        for root in self.skill_dirs:
             backups = root.parent / "skill-backups"
             self.assertEqual((backups / "example.bak/SKILL.md").read_text(), "Earlier backup.")
             self.assertEqual((backups / "example.bak.1/SKILL.md").read_text(), "Old instructions.")
@@ -69,10 +71,10 @@ class SkillDeploymentTests(unittest.TestCase):
 
     def test_repeat_deployment_does_not_replace_links_or_create_backups(self):
         deploy.cmd_skills()
-        inodes = [(root / "example").lstat().st_ino for root in (self.claude, self.codex)]
+        inodes = [(root / "example").lstat().st_ino for root in self.skill_dirs]
         deploy.cmd_skills()
-        self.assertEqual(inodes, [(root / "example").lstat().st_ino for root in (self.claude, self.codex)])
-        for root in (self.claude, self.codex):
+        self.assertEqual(inodes, [(root / "example").lstat().st_ino for root in self.skill_dirs])
+        for root in self.skill_dirs:
             self.assertFalse((root.parent / "skill-backups").exists())
 
     def test_dry_run_does_not_create_directories(self):
@@ -96,7 +98,7 @@ class SkillDeploymentTests(unittest.TestCase):
         (base / ".hidden/SKILL.md").write_text("Hidden skill.")
         (base / "README.md").write_text("Skill documentation.")
         deploy.cmd_skills()
-        for root in (self.claude, self.codex):
+        for root in self.skill_dirs:
             self.assertEqual([p.name for p in root.iterdir()], ["example"])
 
     def test_unmanaged_and_system_skills_are_preserved(self):

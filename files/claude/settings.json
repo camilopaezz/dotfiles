@@ -2,17 +2,6 @@
   "permissions": {
     "defaultMode": "auto"
   },
-  "enabledPlugins": {
-    "frontend-design@claude-plugins-official": true
-  },
-  "extraKnownMarketplaces": {
-    "claude-code-plugins": {
-      "source": {
-        "source": "github",
-        "repo": "anthropics/claude-code"
-      }
-    }
-  },
   "skillOverrides": {
     "batch": "off",
     "claude-api": "off",
@@ -32,11 +21,22 @@
     "update-config": "off",
     "verify": "off"
   },
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-code-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-code"
+      }
+    }
+  },
   "effortLevel": "high",
   "autoMemoryEnabled": false,
   "autoDreamEnabled": false,
   "skipDangerousModePermissionPrompt": true,
-  "theme": "dark",
+  "theme": "auto",
   "editorMode": "normal",
   "skipAutoPermissionPrompt": true
 }

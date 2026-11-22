@@ -1,0 +1,12 @@
+[Unit]
+Description=SSH tunnel to the Kiro gateway for T3 Code
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/bin/ssh -NT -o BatchMode=yes -o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -L 127.0.0.1:18317:127.0.0.1:8317 camilo@192.168.1.91
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

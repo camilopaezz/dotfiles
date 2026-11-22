@@ -15,6 +15,13 @@ BACKUP_SUFFIX = ".bak"
 # ── Symlink mappings ────────────────────────────────────────────
 
 FILE_LINKS = {
+    "wallpapers/monet-stacks-of-wheat-1890.jpg": Path.home() / "Pictures" / "Wallpapers" / "monet-stacks-of-wheat-1890.jpg",
+    "gtk-3.0/settings.ini": Path.home() / ".config" / "gtk-3.0" / "settings.ini",
+    "gtk-4.0/settings.ini": Path.home() / ".config" / "gtk-4.0" / "settings.ini",
+    "qt6ct/qt6ct.conf": Path.home() / ".config" / "qt6ct" / "qt6ct.conf",
+    "zed/settings.json": Path.home() / ".config" / "zed" / "settings.json",
+    "mimeapps.list": Path.home() / ".config" / "mimeapps.list",
+    "wallpapers/monet-water-lilies-1906.jpg": Path.home() / "Pictures" / "Wallpapers" / "monet-water-lilies-1906.jpg",
     ".gitconfig": Path.home() / ".gitconfig",
     "ghostty/config.ghostty": Path.home() / ".config" / "ghostty" / "config",
     "ghostty/themes/noctalia": Path.home() / ".config" / "ghostty" / "themes" / "noctalia",
@@ -24,6 +31,7 @@ FILE_LINKS = {
 }
 
 DIR_LINKS = {
+    "xdg-desktop-portal": Path.home() / ".config" / "xdg-desktop-portal",
     "hypr": Path.home() / ".config" / "hypr",
     "noctalia": Path.home() / ".config" / "noctalia",
     "satty": Path.home() / ".config" / "satty",
@@ -34,6 +42,7 @@ DIR_LINKS = {
 SKILL_DIRS = (
     Path.home() / ".claude" / "skills",
     Path.home() / ".agents" / "skills",
+    Path.home() / ".grok" / "skills",
 )
 
 

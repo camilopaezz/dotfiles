@@ -23,11 +23,23 @@ unset ANTHROPIC_BASE_URL ANTHROPIC_AUTH_TOKEN \
 
 # Android SDK
 export ANDROID_HOME="$HOME/Android/Sdk"
+export ANDROID_SDK_ROOT="$ANDROID_HOME"
+export JAVA_HOME="$HOME/.local/share/java/current"
 
 # Universal PATH additions (prepend user tools; go/cli-tools, grok, bun, local, Android, CUDA).
-export PATH="$HOME/go/bin:$HOME/.grok/bin:$HOME/.bun/bin:$HOME/.local/bin:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:/opt/cuda/bin:$PATH"
+typeset -U path PATH
+export PATH="$HOME/.opencode/bin:$HOME/go/bin:$HOME/.grok/bin:$HOME/.bun/bin:$HOME/.local/bin:$JAVA_HOME/bin:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:/opt/cuda/bin:$PATH"
+
+# Use fnm's Node in every shell; switch project versions when changing directories.
+if (( $+commands[fnm] )); then
+  if [[ -o interactive ]]; then
+    eval "$(fnm env --use-on-cd --shell zsh)"
+  else
+    eval "$(fnm env --shell zsh)"
+  fi
+fi
 
 export OPENCODE_ENABLE_EXA=true
 
 # Vite+ bin (https://viteplus.dev)
-. "$HOME/.vite-plus/env"
+[[ ! -r "$HOME/.vite-plus/env" ]] || source "$HOME/.vite-plus/env"

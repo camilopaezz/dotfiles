@@ -1,0 +1,22 @@
+{
+  "name": "monet-noctalia",
+  "displayName": "Monet Noctalia",
+  "description": "Dark theme derived from Monet Stacks of Wheat and Noctalia.",
+  "version": "0.1.0",
+  "publisher": "camilo",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Monet Noctalia Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/monet-noctalia-color-theme.json"
+      }
+    ]
+  }
+}

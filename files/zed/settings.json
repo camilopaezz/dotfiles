@@ -1,0 +1,9 @@
+{
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "Noctalia Dark"
+  },
+  "ui_font_family": "Adwaita Sans",
+  "ui_font_size": 15
+}
